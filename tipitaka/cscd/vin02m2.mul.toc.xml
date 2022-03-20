@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-16"?><tree>
+
+<tree text="1. Mahākhandhako" action="cscd/vin02m2.mul0.xml" target="text" />
+
+<tree text="2. Uposathakkhandhako" action="cscd/vin02m2.mul1.xml" target="text" />
+
+<tree text="3. Vassūpanāyikakkhandhako" action="cscd/vin02m2.mul2.xml" target="text" />
+
+<tree text="4. Pavāraṇākkhandhako" action="cscd/vin02m2.mul3.xml" target="text" />
+
+<tree text="5. Cammakkhandhako" action="cscd/vin02m2.mul4.xml" target="text" />
+
+<tree text="6. Bhesajjakkhandhako" action="cscd/vin02m2.mul5.xml" target="text" />
+
+<tree text="7. Kathinakkhandhako" action="cscd/vin02m2.mul6.xml" target="text" />
+
+<tree text="8. Cīvarakkhandhako" action="cscd/vin02m2.mul7.xml" target="text" />
+
+<tree text="9. Campeyyakkhandhako" action="cscd/vin02m2.mul8.xml" target="text" />
+
+<tree text="10. Kosambakakkhandhako" action="cscd/vin02m2.mul9.xml" target="text" /></tree>

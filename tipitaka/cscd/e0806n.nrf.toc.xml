@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-16"?><tree>
+
+<tree text="Moggallāna pañcikā ṭīkā" action="cscd/e0806n.nrf0.xml" target="text" />
+
+<tree text="1. Paṭhamakaṇḍavaṇṇanā" action="cscd/e0806n.nrf1.xml" target="text" />
+
+<tree text="2. Dutiyakaṇḍa vaṇṇanā" action="cscd/e0806n.nrf2.xml" target="text" />
+
+<tree text="3. Tatiyakaṇḍavaṇṇanā" action="cscd/e0806n.nrf3.xml" target="text" />
+
+<tree text="Catutthakaṇḍa" action="cscd/e0806n.nrf4.xml" target="text" />
+
+<tree text="Pañcamakaṇḍa" action="cscd/e0806n.nrf5.xml" target="text" />
+
+<tree text="Chaṭṭhakaṇḍa" action="cscd/e0806n.nrf6.xml" target="text" /></tree>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-16"?><tree>
+
+<tree text="Dhātukathā-aṭṭhakathā" action="cscd/abh03a.att0.xml" target="text" />
+
+<tree text="1. Mātikāvaṇṇanā" action="cscd/abh03a.att1.xml" target="text" />
+
+<tree text="2. Niddesavaṇṇanā" action="cscd/abh03a.att2.xml" target="text" />
+
+<tree text="Puggalapaññatti-aṭṭhakathā" action="cscd/abh03a.att3.xml" target="text" />
+
+<tree text="1. Mātikāvaṇṇanā" action="cscd/abh03a.att4.xml" target="text" />
+
+<tree text="2. Niddesavaṇṇanā" action="cscd/abh03a.att5.xml" target="text" />
+
+<tree text="Kathāvatthu-aṭṭhakathā" action="cscd/abh03a.att6.xml" target="text" />
+
+<tree text="Nidānakathā" action="cscd/abh03a.att7.xml" target="text" />
+
+<tree text="1. Puggalakathā" action="cscd/abh03a.att8.xml" target="text" />
+
+<tree text="2. Parihānikathā" action="cscd/abh03a.att9.xml" target="text" />
+
+<tree text="3. Brahmacariyakathā" action="cscd/abh03a.att10.xml" target="text" />
+
+<tree text="4. Jahatikathā" action="cscd/abh03a.att11.xml" target="text" />
+
+<tree text="5. Sabbamatthītikathā" action="cscd/abh03a.att12.xml" target="text" />
+
+<tree text="6. Atītakkhandhādikathā" action="cscd/abh03a.att13.xml" target="text" />
+
+<tree text="7. Ekaccaṃatthītikathā" action="cscd/abh03a.att14.xml" target="text" />
+
+<tree text="8. Satipaṭṭhānakathāvaṇṇanā" action="cscd/abh03a.att15.xml" target="text" />
+
+<tree text="9. Hevatthikathāvaṇṇanā" action="cscd/abh03a.att16.xml" target="text" />
+
+<tree text="2. Dutiyavaggo" action="cscd/abh03a.att17.xml" target="text" />
+
+<tree text="3. Tatiyavaggo" action="cscd/abh03a.att18.xml" target="text" />
+
+<tree text="4. Catutthavaggo" action="cscd/abh03a.att19.xml" target="text" />
+
+<tree text="5. Pañcamavaggo" action="cscd/abh03a.att20.xml" target="text" />
+
+<tree text="6. Chaṭṭhavaggo" action="cscd/abh03a.att21.xml" target="text" />
+
+<tree text="7. Sattamavaggo" action="cscd/abh03a.att22.xml" target="text" />
+
+<tree text="8. Aṭṭhamavaggo" action="cscd/abh03a.att23.xml" target="text" />
+
+<tree text="9. Navamavaggo" action="cscd/abh03a.att24.xml" target="text" />
+
+<tree text="10. Dasamavaggo" action="cscd/abh03a.att25.xml" target="text" />
+
+<tree text="11. Ekādasamavaggo" action="cscd/abh03a.att26.xml" target="text" />
+
+<tree text="12. Dvādasamavaggo" action="cscd/abh03a.att27.xml" target="text" />
+
+<tree text="13. Terasamavaggo" action="cscd/abh03a.att28.xml" target="text" />
+
+<tree text="14. Cuddasamavaggo" action="cscd/abh03a.att29.xml" target="text" />
+
+<tree text="15. Pannarasamavaggo" action="cscd/abh03a.att30.xml" target="text" />
+
+<tree text="16. Soḷasamavaggo" action="cscd/abh03a.att31.xml" target="text" />
+
+<tree text="17. Sattarasamavaggo" action="cscd/abh03a.att32.xml" target="text" />
+
+<tree text="18. Aṭṭhārasamavaggo" action="cscd/abh03a.att33.xml" target="text" />
+
+<tree text="19. Ekūnavīsatimavaggo" action="cscd/abh03a.att34.xml" target="text" />
+
+<tree text="20. Vīsatimavaggo" action="cscd/abh03a.att35.xml" target="text" />
+
+<tree text="21. Ekavīsatimavaggo" action="cscd/abh03a.att36.xml" target="text" />
+
+<tree text="22. Bāvīsatimavaggo" action="cscd/abh03a.att37.xml" target="text" />
+
+<tree text="23. Tevīsatimavaggo" action="cscd/abh03a.att38.xml" target="text" />
+
+<tree text="Yamakappakaraṇa-aṭṭhakathā" action="cscd/abh03a.att39.xml" target="text" />
+
+<tree text="1. Mūlayamakaṃ" action="cscd/abh03a.att40.xml" target="text" />
+
+<tree text="2. Khandhayamakaṃ" action="cscd/abh03a.att41.xml" target="text" />
+
+<tree text="3. Āyatanayamakaṃ" action="cscd/abh03a.att42.xml" target="text" />
+
+<tree text="4. Dhātuyamakaṃ" action="cscd/abh03a.att43.xml" target="text" />
+
+<tree text="5. Saccayamakaṃ" action="cscd/abh03a.att44.xml" target="text" />
+
+<tree text="6. Saṅkhārayamakaṃ" action="cscd/abh03a.att45.xml" target="text" />
+
+<tree text="7. Anusayayamakaṃ" action="cscd/abh03a.att46.xml" target="text" />
+
+<tree text="8. Cittayamakaṃ" action="cscd/abh03a.att47.xml" target="text" />
+
+<tree text="9. Dhammayamakaṃ" action="cscd/abh03a.att48.xml" target="text" />
+
+<tree text="10. Indriyayamakaṃ" action="cscd/abh03a.att49.xml" target="text" />
+
+<tree text="Paṭṭhānappakaraṇa-aṭṭhakathā" action="cscd/abh03a.att50.xml" target="text" />
+
+<tree text="Paccayuddesavaṇṇanā" action="cscd/abh03a.att51.xml" target="text" />
+
+<tree text="Paccayaniddeso" action="cscd/abh03a.att52.xml" target="text" />
+
+<tree text="1. Kusalattikavaṇṇanā" action="cscd/abh03a.att53.xml" target="text" />
+
+<tree text="2. Vedanāttikavaṇṇanā" action="cscd/abh03a.att54.xml" target="text" />
+
+<tree text="3. Vipākattikavaṇṇanā" action="cscd/abh03a.att55.xml" target="text" />
+
+<tree text="4. Upādinnattikavaṇṇanā" action="cscd/abh03a.att56.xml" target="text" />
+
+<tree text="5-22. Saṅkiliṭṭhattikādivaṇṇanā" action="cscd/abh03a.att57.xml" target="text" />
+
+<tree text="2. Dukapaṭṭhānavaṇṇanā" action="cscd/abh03a.att58.xml" target="text" />
+
+<tree text="3. Dukatikapaṭṭhānavaṇṇanā" action="cscd/abh03a.att59.xml" target="text" />
+
+<tree text="4. Tikadukapaṭṭhānavaṇṇanā" action="cscd/abh03a.att60.xml" target="text" />
+
+<tree text="5. Tikatikapaṭṭhānavaṇṇanā" action="cscd/abh03a.att61.xml" target="text" />
+
+<tree text="6. Dukadukapaṭṭhānavaṇṇanā" action="cscd/abh03a.att62.xml" target="text" />
+
+<tree text="7-12. Paccanīyapaṭṭhānavaṇṇanā" action="cscd/abh03a.att63.xml" target="text" />
+
+<tree text="13-18. Anulomapaccanīyapaṭṭhānavaṇṇanā" action="cscd/abh03a.att64.xml" target="text" />
+
+<tree text="19-24. Paccanīyānulomapaṭṭhānavaṇṇanā" action="cscd/abh03a.att65.xml" target="text" /></tree>

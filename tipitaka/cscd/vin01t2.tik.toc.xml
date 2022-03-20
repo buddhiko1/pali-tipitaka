@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-16"?><tree>
+
+<tree text="1. Pārājikakaṇḍaṃ" action="cscd/vin01t2.tik0.xml" target="text" />
+
+<tree text="2. Saṅghādisesakaṇḍaṃ" action="cscd/vin01t2.tik1.xml" target="text" />
+
+<tree text="3. Aniyatakaṇḍaṃ" action="cscd/vin01t2.tik2.xml" target="text" />
+
+<tree text="4. Nissaggiyakaṇḍaṃ" action="cscd/vin01t2.tik3.xml" target="text" /></tree>

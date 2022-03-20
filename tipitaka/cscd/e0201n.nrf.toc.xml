@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-16"?><tree>
+
+<tree text="1. Sandhikaṇḍa" action="cscd/e0201n.nrf0.xml" target="text" />
+
+<tree text="2. Nāmakaṇḍa" action="cscd/e0201n.nrf1.xml" target="text" />
+
+<tree text="3. Kārakakaṇḍa" action="cscd/e0201n.nrf2.xml" target="text" />
+
+<tree text="4. Samāsakaṇḍa" action="cscd/e0201n.nrf3.xml" target="text" />
+
+<tree text="5. Taddhita" action="cscd/e0201n.nrf4.xml" target="text" />
+
+<tree text="6. Ākhyātakaṇḍa" action="cscd/e0201n.nrf5.xml" target="text" />
+
+<tree text="7. Kitakaṇḍa" action="cscd/e0201n.nrf6.xml" target="text" /></tree>

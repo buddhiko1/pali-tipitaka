@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-16"?><tree>
+
+<tree text="Ganthārambhakathā" action="cscd/vin06t.nrf0.xml" target="text" />
+
+<tree text="Pārājikavaṇṇanā" action="cscd/vin06t.nrf1.xml" target="text" />
+
+<tree text="Pācittiyavaṇṇanā" action="cscd/vin06t.nrf2.xml" target="text" />
+
+<tree text="Mahāvaggavaṇṇanā" action="cscd/vin06t.nrf3.xml" target="text" />
+
+<tree text="Cūḷavaggavaṇṇanā" action="cscd/vin06t.nrf4.xml" target="text" />
+
+<tree text="Parivāravaṇṇanā" action="cscd/vin06t.nrf5.xml" target="text" /></tree>

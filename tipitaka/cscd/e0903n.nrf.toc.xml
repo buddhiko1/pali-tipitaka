@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-16"?><tree>
+
+<tree text="Sagāthāvaggapāḷi" action="cscd/e0903n.nrf0.xml" target="text" />
+
+<tree text="Nidānavaggapāḷi" action="cscd/e0903n.nrf1.xml" target="text" />
+
+<tree text="Khandhavaggasaṃyuttapāḷi" action="cscd/e0903n.nrf2.xml" target="text" />
+
+<tree text="Saḷāyatanavaggasaṃyuttapāḷi" action="cscd/e0903n.nrf3.xml" target="text" />
+
+<tree text="Mahāvaggasaṃyuttapāḷi" action="cscd/e0903n.nrf4.xml" target="text" /></tree>

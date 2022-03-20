@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-16"?><tree>
+
+<tree text="1. Paṇḍitakaṇḍo" action="cscd/e1005n.nrf0.xml" target="text" />
+
+<tree text="Sujanakaṇḍo" action="cscd/e1005n.nrf1.xml" target="text" />
+
+<tree text="4. Bāladujjanakaṇḍo" action="cscd/e1005n.nrf2.xml" target="text" />
+
+<tree text="4. Mittakaṇḍo" action="cscd/e1005n.nrf3.xml" target="text" />
+
+<tree text="5. Itthikaṇḍo" action="cscd/e1005n.nrf4.xml" target="text" />
+
+<tree text="6. Rājakaṇḍo" action="cscd/e1005n.nrf5.xml" target="text" />
+
+<tree text="7. Pakiṇṇakakaṇḍo" action="cscd/e1005n.nrf6.xml" target="text" /></tree>

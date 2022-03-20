@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-16"?><tree>
+
+<tree text="Sīmavisodhanī" action="cscd/e1102n.nrf0.xml" target="text" />
+
+<tree text="1. Upasampadākaṇḍo" action="cscd/e1102n.nrf1.xml" target="text" />
+
+<tree text="2. Kappavināsakaṇḍo" action="cscd/e1102n.nrf2.xml" target="text" />
+
+<tree text="3. Nibbānakaṇḍo" action="cscd/e1102n.nrf3.xml" target="text" />
+
+<tree text="4. Samasīsikaṇḍo" action="cscd/e1102n.nrf4.xml" target="text" />
+
+<tree text="Pakiṇṇakakaṇḍo" action="cscd/e1102n.nrf5.xml" target="text" /></tree>
