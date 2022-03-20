@@ -1,0 +1,19 @@
+{
+  "name": "dhamma-epub",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ts-node": "^10.7.0",
+    "tsc": "^2.0.4",
+    "xml2js": "^0.4.23"
+  },
+  "devDependencies": {
+    "@types/xml2js": "^0.4.9"
+  }
+}
