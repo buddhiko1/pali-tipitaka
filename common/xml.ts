@@ -34,21 +34,20 @@ export class IndexParser extends ParserBase {
 
   private async _extract(xml: IXmlStructOfIndex, dir: string): Promise<IIndex> {
     let result: IIndex = {
-      title: xml?.$?.text ?? 'index',
-      src: []
+      title: xml.$.text,
+      src: [],
     };
     if (xml.tree) {
       let nodes: IIndex[] = []
       for (let node of xml.tree) {
-        nodes.push(await this._extract(node, dir));
+        nodes.push(await this._extract(node, dir, ));
       }
       result.src = nodes
     } else {
-      result.title = xml.$.text
       if (xml.$.src.startsWith("toc")) {
         const srcPath = `${dir}/${xml.$.src}`;
         let nestedIndex = await this.parse(srcPath);
-        result.src = [nestedIndex];
+        return nestedIndex;
       } else {
         result.src = xml.$.src;
       }
@@ -56,9 +55,9 @@ export class IndexParser extends ParserBase {
     return result
   }
 
-  async parse(rootFile: string, rootTitle: string): Promise<IIndex> {
+  async parse(rootFile: string): Promise<IIndex> {
     const dir = path.dirname(rootFile);
-    const xml = await this._parseXml(rootFile);
-    return this._extract(xml, dir)
+    const xml = await this._parseXml(rootFile)
+    return this._extract(xml, dir);
   }
 }

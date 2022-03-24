@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
-<tree>
-  <!--  Aṭṭhakathā//-->
+<tree text="Aṭṭhakathā">
   <tree text="Vinayapiṭaka (aṭṭhakathā)">
     <tree text="Pārājikakaṇḍa-aṭṭhakathā" src="./cscd/vin01a.att.toc.xml" />
     <tree text="Pācittiya-aṭṭhakathā" src="./cscd/vin02a1.att.toc.xml" />

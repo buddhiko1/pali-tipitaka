@@ -4,8 +4,7 @@ import { IndexParser } from "./common/xml";
 async function run() {
   const file = `${__dirname}/tipitaka/toc0.xml`;
   const parser = new IndexParser();
-  const rootTitle = "dhamma"
-  let result = await parser.parse(file, rootTitle)
+  let result = await parser.parse(file)
   console.log(JSON.stringify(result))
 }
 

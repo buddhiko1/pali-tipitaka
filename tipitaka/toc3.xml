@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
-<tree>
-  <!-- "Tīkā" //-->
+<tree text="Tīkā">
   <tree text="Vinayapiṭaka (ṭīkā)">
     <tree text="Sāratthadīpanī-ṭīkā-1" src="./cscd/vin01t1.tik.toc.xml" />
     <tree text="Sāratthadīpanī-ṭīkā-2" src="./cscd/vin01t2.tik.toc.xml" />

@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
-<tree>
-  <!-- "Anya" //-->
+<tree text="Anya">
   <tree text="Visuddhimagga">
     <tree text="Visuddhimagga-1" src="./cscd/e0101n.mul.toc.xml" />
     <tree text="Visuddhimagga-2" src="./cscd/e0102n.mul.toc.xml" />
