@@ -9,11 +9,17 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "clear": "^0.1.0",
+    "figlet": "^1.5.2",
+    "inquirer": "^8.2.2",
     "ts-node": "^10.7.0",
     "tsc": "^2.0.4",
     "xml2js": "^0.4.23"
   },
   "devDependencies": {
+    "@types/clear": "^0.1.2",
+    "@types/figlet": "^1.5.4",
+    "@types/inquirer": "^8.2.0",
     "@types/xml2js": "^0.4.9"
   }
 }

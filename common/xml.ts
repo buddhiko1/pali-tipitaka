@@ -34,7 +34,7 @@ export class IndexParser extends ParserBase {
 
   private async _extract(xml: IXmlStructOfIndex, dir: string): Promise<IIndex> {
     let result: IIndex = {
-      title: xml.$.text,
+      text: xml.$.text,
       src: [],
     };
     if (xml.tree) {

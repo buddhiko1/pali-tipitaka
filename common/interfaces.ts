@@ -7,6 +7,6 @@ export interface IXmlStructOfIndex {
 }
 
 export interface IIndex {
-  title: string;
+  text: string;
   src: Array<IIndex> | string;
 }
