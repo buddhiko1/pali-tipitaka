@@ -1,7 +1,8 @@
 import fs from "fs";
-import path from "path"
-import { IXmlStructOfIndex, IIndex } from "./interfaces"
 import { Parser, ParserOptions } from "xml2js";
+
+import { IXmlStructOfIndex, IIndex, IXmlStructOfChapter, IXmlStructOfBook, IChapter, IBOOk } from "./interfaces"
+import { INDEX_DIR } from "../config"
 
 abstract class ParserBase {
   private _parser: Parser;
@@ -32,7 +33,7 @@ export class IndexParser extends ParserBase {
     super()
   };
 
-  private async _extract(xml: IXmlStructOfIndex, dir: string): Promise<IIndex> {
+  private async _extract(xml: IXmlStructOfIndex): Promise<IIndex> {
     let result: IIndex = {
       text: xml.$.text,
       src: [],
@@ -40,12 +41,12 @@ export class IndexParser extends ParserBase {
     if (xml.tree) {
       let nodes: IIndex[] = []
       for (let node of xml.tree) {
-        nodes.push(await this._extract(node, dir, ));
+        nodes.push(await this._extract(node));
       }
       result.src = nodes
     } else {
       if (xml.$.src.startsWith("toc")) {
-        const srcPath = `${dir}/${xml.$.src}`;
+        const srcPath = `${INDEX_DIR}/${xml.$.src}`;
         let nestedIndex = await this.parse(srcPath);
         return nestedIndex;
       } else {
@@ -56,8 +57,36 @@ export class IndexParser extends ParserBase {
   }
 
   async parse(rootFile: string): Promise<IIndex> {
-    const dir = path.dirname(rootFile);
     const xml = await this._parseXml(rootFile)
-    return this._extract(xml, dir);
+    return this._extract(xml);
+  }
+}
+
+export class BookParser extends ParserBase {
+  constructor() {
+    super();
+  }
+
+  async parse(index: IIndex) {
+    let book: IBOOk = {
+      title: index.text,
+      chapters: [],
+    };
+    const indexFile = `${INDEX_DIR}${index.src.slice(1)}`;
+    const xml = await this._parseXml(indexFile);
+    for (let chapterXml of xml.tree) {
+      const chapter = await this._parseChapter(chapterXml)
+      book.chapters.push(chapter)
+    }
+    console.dir(book)
+  }
+
+  private async _parseChapter(xml: IXmlStructOfChapter): Promise<IChapter> {
+    const xmlFile = `${INDEX_DIR}/${xml.$.action}`
+    const content = await this._parseXml(xmlFile) 
+    return {
+      title: xml.$.text,
+      xml: content
+    };
   }
 }

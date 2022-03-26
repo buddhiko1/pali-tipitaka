@@ -1,16 +1,17 @@
 import clear from "clear";
 import figlet from "figlet";
 import inquirer from "inquirer";
+import path from "path"
 
-import { IndexParser } from "./common/xml";
+import { IndexParser, BookParser } from "./common/xml";
 import { IIndex } from "./common/interfaces";
-import { INDEX_ROOT_FILE } from "./config";
+import { ROOT_INDEX_FILE } from "./config";
 
 async function run() {
   clear()
-  console.log(figlet.textSync("Dhamma"));
+  // console.log(figlet.textSync("Dhamma Epub"));
   const parser = new IndexParser();
-  const indexJson = await parser.parse(INDEX_ROOT_FILE);
+  const indexJson = await parser.parse(ROOT_INDEX_FILE);
   const series = typeof indexJson.src === "string" ? [] : indexJson.src
   let collections: IIndex[];
   let books: IIndex[];
@@ -37,6 +38,7 @@ async function run() {
         {
           type: "list",
           name: "collection",
+          loop: false,
           message: "Which collection?",
           choices: collections.flatMap((item) => item.text),
         },
@@ -54,6 +56,7 @@ async function run() {
         {
           type: "list",
           name: "book",
+          loop: false,
           message: "Which book?",
           choices: books.flatMap((item) => item.text),
         },
@@ -66,20 +69,27 @@ async function run() {
         typeof selectedBook.src === "string"
           ? []
           : selectedBook.src;
-      return inquirer.prompt([
-        {
-          type: "list",
-          name: "volume",
-          message: "Which volume?",
-          choices: volumes.flatMap((item) => item.text),
-        },
-      ]);
+      if (volumes.length) {
+        return inquirer.prompt([
+          {
+            type: "list",
+            loop: false,
+            name: "volume",
+            message: "Which volume?",
+            choices: volumes.flatMap((item) => item.text),
+          },
+        ]);
+      } else {
+        return selectedBook
+      }
     })
     .then((answer) => {
       const selectedVolume = volumes.find(
         (item) => item.text === answer.volume
       );
-      console.log(selectedVolume)
+      const bookIndex = selectedVolume ?? answer
+      let bookParser = new BookParser();
+      bookParser.parse(bookIndex)
     })
 }
 

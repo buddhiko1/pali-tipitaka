@@ -5,4 +5,5 @@
 //   VOLUME = "volume",
 // }
 
-export const INDEX_ROOT_FILE = `${__dirname}/tipitaka/toc0.xml`;
+export const INDEX_DIR = `${__dirname}/tipitaka`
+export const ROOT_INDEX_FILE = `${INDEX_DIR}/toc0.xml`;
