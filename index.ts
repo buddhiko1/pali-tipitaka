@@ -1,7 +1,5 @@
 import clear from "clear";
-import figlet from "figlet";
 import inquirer from "inquirer";
-import path from "path"
 
 import { IndexParser, BookParser } from "./common/xml";
 import { IIndex } from "./common/interfaces";
@@ -9,7 +7,6 @@ import { ROOT_INDEX_FILE } from "./config";
 
 async function run() {
   clear()
-  // console.log(figlet.textSync("Dhamma Epub"));
   const parser = new IndexParser();
   const indexJson = await parser.parse(ROOT_INDEX_FILE);
   const series = typeof indexJson.src === "string" ? [] : indexJson.src
