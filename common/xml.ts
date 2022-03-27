@@ -15,9 +15,9 @@ abstract class ParserBase {
   }
 
   protected async _parseXml(file: string) {
-    const fileContent = fs.readFileSync(file, "utf-8");
+    const content = fs.readFileSync(file, "utf-8");
     return this._parser
-      .parseStringPromise(fileContent)
+      .parseStringPromise(content)
       .then((result) => {
         return result;
       })
@@ -28,37 +28,35 @@ abstract class ParserBase {
 }
 
 export class IndexParser extends ParserBase {
-
   constructor() {
-    super()
-  };
+    super();
+  }
 
-  private async _extract(xml: IXmlStructOfIndex): Promise<IIndex> {
-    let result: IIndex = {
+  async parse(indexFile: string): Promise<IIndex> {
+    const xml = await this._parseXml(indexFile);
+    return this._extractIndex(xml);
+  }
+
+  private async _extractIndex(xml: IXmlStructOfIndex): Promise<IIndex> {
+    let index: IIndex = {
       text: xml.$.text,
       src: [],
     };
     if (xml.tree) {
-      let nodes: IIndex[] = []
+      let nodes: IIndex[] = [];
       for (let node of xml.tree) {
-        nodes.push(await this._extract(node));
+        nodes.push(await this._extractIndex(node));
       }
-      result.src = nodes
+      index.src = nodes;
     } else {
       if (xml.$.src.startsWith("toc")) {
-        const srcPath = `${INDEX_DIR}/${xml.$.src}`;
-        let nestedIndex = await this.parse(srcPath);
-        return nestedIndex;
+        const indexFile = `${INDEX_DIR}/${xml.$.src}`;
+        return await this.parse(indexFile);
       } else {
-        result.src = xml.$.src;
+        index.src = xml.$.src;
       }
     }
-    return result
-  }
-
-  async parse(rootFile: string): Promise<IIndex> {
-    const xml = await this._parseXml(rootFile)
-    return this._extract(xml);
+    return index;
   }
 }
 
@@ -73,7 +71,7 @@ export class BookParser extends ParserBase {
       chapters: [],
     };
     const indexFile = `${INDEX_DIR}${index.src.slice(1)}`;
-    const xml = await this._parseXml(indexFile);
+    const xml: IXmlStructOfBook = await this._parseXml(indexFile);
     for (let chapterXml of xml.tree) {
       const chapter = await this._parseChapter(chapterXml)
       book.chapters.push(chapter)
