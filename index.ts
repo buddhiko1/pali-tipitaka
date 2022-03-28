@@ -1,9 +1,10 @@
 import clear from "clear";
 import inquirer from "inquirer";
 
-import { IndexParser, BookParser } from "./common/xml";
-import { IIndex } from "./common/interfaces";
-import { ROOT_INDEX_FILE } from "./config";
+import { IndexParser, BookParser } from "./xml";
+import { Factory as EpubFactory } from "./epub";
+import { IIndex, IBOOk } from "./xml/interfaces";
+import { ROOT_INDEX_FILE, OUTPUT_DIR } from "./config";
 
 async function run() {
   clear()
@@ -14,7 +15,7 @@ async function run() {
   let books: IIndex[];
   let volumes: IIndex[];
   //
-  inquirer
+  await inquirer
     .prompt([
       {
         type: "list",
@@ -80,13 +81,15 @@ async function run() {
         return selectedBook
       }
     })
-    .then((answer) => {
+    .then(async (answer) => {
       const selectedVolume = volumes.find(
         (item) => item.text === answer.volume
       );
       const bookIndex = selectedVolume ?? answer
-      let bookParser = new BookParser();
-      bookParser.parse(bookIndex)
+      const bookParser = new BookParser();
+      const book: IBOOk = await bookParser.parse(bookIndex)
+      const epubFactory = new EpubFactory(OUTPUT_DIR)
+      await epubFactory.make(book)
     })
 }
 

@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@lesjoursfr/html-to-epub": "^2.0.5",
     "clear": "^0.1.0",
     "inquirer": "^8.2.2",
     "ts-node": "^10.7.0",
