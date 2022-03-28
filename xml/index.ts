@@ -65,7 +65,7 @@ export class BookParser extends ParserBase {
     super();
   }
 
-  async parse(index: IIndex) {
+  async parse(index: IIndex): Promise<IBOOk> {
     let book: IBOOk = {
       title: index.text,
       chapters: [],
@@ -73,18 +73,44 @@ export class BookParser extends ParserBase {
     const indexFile = `${INDEX_DIR}${index.src.slice(1)}`;
     const xml: IXmlStructOfBook = await this._parseXml(indexFile);
     for (let chapterXml of xml.tree) {
-      const chapter = await this._parseChapter(chapterXml)
+      const chapter = this._parseChapter(chapterXml)
       book.chapters.push(chapter)
     }
-    console.dir(book)
+    return book
   }
 
-  private async _parseChapter(xml: IXmlStructOfChapter): Promise<IChapter> {
+  private _parseChapter(xml: IXmlStructOfChapter): IChapter {
     const xmlFile = `${INDEX_DIR}/${xml.$.action}`
-    const content = await this._parseXml(xmlFile) 
-    return {
-      title: xml.$.text,
-      xml: content
-    };
+    console.log(xmlFile);
+    const fileContent = fs.readFileSync(xmlFile, "utf-8");
+    const title = xml.$.text.replace(/^[\(\d\)\. ]*/g, "");
+    const body = this._extractBody(fileContent);
+    if (body) {
+      return {
+        title,
+        body,
+      };
+    } else {
+      throw Error(`invalid body from file: ${xmlFile}!`)
+    }
+  }
+
+  private _extractBody(fileContent: string): string {
+    const bodyRegexp = /<body>(?<body>[\w|\W]*)<\/body>/g;
+    const matchedArray = [...fileContent.matchAll(bodyRegexp)];
+    let body = matchedArray[0]?.groups?.body ?? ""
+    if (body) {
+      let homageRegex = /(?<=^[\r\n]*)<p rend="centre"> Namo tassa bhagavato arahato sammāsambuddhassa<\/p>/g;
+      body = body.replace(homageRegex, "");
+      const nikayaRegexp = /<p rend="nikaya">[\w|\W]*?<\/p>/g;
+      body = body.replace(nikayaRegexp, "");
+      const titleRegex = /(?<=<p rend="book">[\w|\W]*?<\/p>[\r\n]*)<p rend="title">[\w|\W]*?<\/p>/g;
+      body = body.replace(titleRegex, "");
+      const bookRegexp = /<p rend="book">[\w|\W]*?<\/p>/g;
+      body = body.replace(bookRegexp, "");
+      const returnRegexp = /^[\r\n]*/g;
+      body = body.replace(returnRegexp, "")
+    }
+    return body
   }
 }

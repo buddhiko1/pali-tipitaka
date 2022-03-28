@@ -25,7 +25,7 @@ export interface IXmlStructOfBook {
 
 export interface IChapter {
   title: string,
-  xml: string
+  body: string
 }
 
 export interface IBOOk {
