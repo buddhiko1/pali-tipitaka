@@ -1,0 +1,59 @@
+@font-face {
+  font-family: "Pali";
+  font-style: normal;
+  font-weight: normal;
+  src : url("./fonts/Pali.ttf");
+}
+
+body {
+	font-family: "Pali";
+	line-height: 1.5rem;
+}
+
+h1 {
+	color: maroon;
+	text-indent: 0.5em;
+	font-size: 1.7rem;
+}
+
+.subhead {
+	margin-top: 2.5rem;
+	font-weight: bold;
+	color:rgba(7, 61, 238, 0.918);
+}
+
+li[class="table-of-content"] {
+ 	padding: 0.3rem 0;
+	margin-left: 1rem;
+}
+
+li[class="table-of-content"] > a {
+ 	text-decoration:none;
+}
+
+hi[rend="paranum"] {
+	display: none;
+}
+
+hi[rend="dot"] {
+	display: none;
+}
+
+p {
+	color: #008080;
+	text-indent: 1.3em;
+}
+
+p:first-child {
+	color: maroon;
+	font-weight: bold;
+	font-size: 1.15rem;
+	text-indent: 0.5em;
+}
+
+
+note {
+	font-style: italic;
+  color: gray;
+  font-size: 0.8rem;
+}

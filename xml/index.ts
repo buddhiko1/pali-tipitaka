@@ -81,7 +81,6 @@ export class BookParser extends ParserBase {
 
   private _parseChapter(xml: IXmlStructOfChapter): IChapter {
     const xmlFile = `${INDEX_DIR}/${xml.$.action}`
-    console.log(xmlFile);
     const fileContent = fs.readFileSync(xmlFile, "utf-8");
     const title = xml.$.text.replace(/^[\(\d\)\. ]*/g, "");
     const body = this._extractBody(fileContent);
@@ -100,16 +99,23 @@ export class BookParser extends ParserBase {
     const matchedArray = [...fileContent.matchAll(bodyRegexp)];
     let body = matchedArray[0]?.groups?.body ?? ""
     if (body) {
-      let homageRegex = /(?<=^[\r\n]*)<p rend="centre"> Namo tassa bhagavato arahato sammāsambuddhassa<\/p>/g;
+      // remove redundant html
+      let homageRegex =
+        /(?<=^[\r\n]*)<p rend="centre"> Namo tassa bhagavato arahato sammāsambuddhassa<\/p>/g;
       body = body.replace(homageRegex, "");
       const nikayaRegexp = /<p rend="nikaya">[\w|\W]*?<\/p>/g;
       body = body.replace(nikayaRegexp, "");
-      const titleRegex = /(?<=<p rend="book">[\w|\W]*?<\/p>[\r\n]*)<p rend="title">[\w|\W]*?<\/p>/g;
+      const titleRegex =
+        /(?<=<p rend="book">[\w|\W]*?<\/p>[\r\n]*)<p rend="title">[\w|\W]*?<\/p>/g;
       body = body.replace(titleRegex, "");
       const bookRegexp = /<p rend="book">[\w|\W]*?<\/p>/g;
       body = body.replace(bookRegexp, "");
       const returnRegexp = /^[\r\n]*/g;
-      body = body.replace(returnRegexp, "")
+      body = body.replace(returnRegexp, "");
+      
+      //
+      const subTitleRegexp = /<p rend="subhead">/g;
+      body = body.replaceAll(subTitleRegexp, '<p class="subhead">')
     }
     return body
   }

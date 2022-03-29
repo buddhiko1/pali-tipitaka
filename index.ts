@@ -11,9 +11,13 @@ async function run() {
   const parser = new IndexParser();
   const indexJson = await parser.parse(ROOT_INDEX_FILE);
   const series = typeof indexJson.src === "string" ? [] : indexJson.src
+  let selectedSeries: IIndex;
   let collections: IIndex[];
+  let selectedCollection: IIndex;
   let books: IIndex[];
+  let selectedBook: IIndex;
   let volumes: IIndex[];
+
   //
   await inquirer
     .prompt([
@@ -25,7 +29,7 @@ async function run() {
       },
     ])
     .then((answer) => {
-      const selectedSeries = series.find(
+      selectedSeries = series.find(
         (item) => item.text === answer.series
       ) ?? <never>answer;
       collections =
@@ -43,7 +47,7 @@ async function run() {
       ]);
     })
     .then((answer) => {
-      const selectedCollection =
+      selectedCollection =
         collections.find((item) => item.text === answer.collection) ??
         <never>answer;
       books =
@@ -61,7 +65,7 @@ async function run() {
       ]);
     })
     .then((answer) => {
-      const selectedBook =
+      selectedBook =
         books.find((item) => item.text === answer.book) ?? <never>answer;
       volumes =
         typeof selectedBook.src === "string"
@@ -87,9 +91,14 @@ async function run() {
       );
       const bookIndex = selectedVolume ?? answer
       const bookParser = new BookParser();
-      const book: IBOOk = await bookParser.parse(bookIndex)
+      const bookContent: IBOOk = await bookParser.parse(bookIndex)
       const epubFactory = new EpubFactory(OUTPUT_DIR)
-      await epubFactory.make(book)
+      await epubFactory.make(
+        selectedSeries,
+        selectedCollection,
+        selectedBook,
+        bookContent
+      );
     })
 }
 

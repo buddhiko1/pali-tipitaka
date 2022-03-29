@@ -10,8 +10,11 @@
   "license": "ISC",
   "dependencies": {
     "@lesjoursfr/html-to-epub": "^2.0.5",
+    "@types/text-to-svg": "^3.1.1",
     "clear": "^0.1.0",
     "inquirer": "^8.2.2",
+    "sharp": "^0.30.3",
+    "text-to-svg": "^3.1.5",
     "ts-node": "^10.7.0",
     "tsc": "^2.0.4",
     "xml2js": "^0.4.23"
@@ -20,6 +23,7 @@
     "@types/clear": "^0.1.2",
     "@types/figlet": "^1.5.4",
     "@types/inquirer": "^8.2.0",
+    "@types/sharp": "^0.30.0",
     "@types/xml2js": "^0.4.9"
   }
 }
