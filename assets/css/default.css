@@ -11,7 +11,7 @@ body {
 }
 
 h1 {
-	color: maroon;
+	color: #AD0101;
 	text-indent: 0.5em;
 	font-size: 1.7rem;
 }
@@ -19,7 +19,7 @@ h1 {
 .subhead {
 	margin-top: 2.5rem;
 	font-weight: bold;
-	color:rgba(7, 61, 238, 0.918);
+	color:rgba(13, 63, 228, 0.918);
 }
 
 li[class="table-of-content"] {
@@ -45,7 +45,7 @@ p {
 }
 
 p:first-child {
-	color: maroon;
+	color: #AD0101;
 	font-weight: bold;
 	font-size: 1.15rem;
 	text-indent: 0.5em;
