@@ -3,19 +3,22 @@ import inquirer from "inquirer";
 
 import { IndexParser, BookParser } from "./xml";
 import { Factory as EpubFactory } from "./epub";
-import { IIndex, IBOOk } from "./xml/interfaces";
+import { IIndex, IBookInfo } from "./xml/interfaces";
 import { ROOT_INDEX_FILE, OUTPUT_DIR } from "./config";
 
-async function run() {
+(async () => {
   clear()
   const parser = new IndexParser();
   const indexJson = await parser.parse(ROOT_INDEX_FILE);
-  const series = typeof indexJson.src === "string" ? [] : indexJson.src
-  let selectedSeries: IIndex;
+  let bookInfo: IBookInfo = {
+    series: { text: "", src: "" },
+    collection: { text: "", src: "" },
+    book: { text: "", src: "" },
+    volume: { title: "", chapters: []}
+  };
+  let series = typeof indexJson.src === "string" ? [] : indexJson.src
   let collections: IIndex[];
-  let selectedCollection: IIndex;
   let books: IIndex[];
-  let selectedBook: IIndex;
   let volumes: IIndex[];
 
   //
@@ -29,13 +32,13 @@ async function run() {
       },
     ])
     .then((answer) => {
-      selectedSeries = series.find(
+      bookInfo.series = series.find(
         (item) => item.text === answer.series
       ) ?? <never>answer;
       collections =
-        typeof selectedSeries.src === "string"
+        typeof bookInfo.series.src === "string"
           ? []
-          : selectedSeries.src;
+          : bookInfo.series.src;
       return inquirer.prompt([
         {
           type: "list",
@@ -47,13 +50,13 @@ async function run() {
       ]);
     })
     .then((answer) => {
-      selectedCollection =
+      bookInfo.collection =
         collections.find((item) => item.text === answer.collection) ??
         <never>answer;
       books =
-        typeof selectedCollection.src === "string"
+        typeof bookInfo.collection.src === "string"
           ? []
-          : selectedCollection.src;
+          : bookInfo.collection.src;
       return inquirer.prompt([
         {
           type: "list",
@@ -65,12 +68,12 @@ async function run() {
       ]);
     })
     .then((answer) => {
-      selectedBook =
+      bookInfo.book =
         books.find((item) => item.text === answer.book) ?? <never>answer;
       volumes =
-        typeof selectedBook.src === "string"
+        typeof bookInfo.book.src === "string"
           ? []
-          : selectedBook.src;
+          : bookInfo.book.src;
       if (volumes.length) {
         return inquirer.prompt([
           {
@@ -82,24 +85,14 @@ async function run() {
           },
         ]);
       } else {
-        return selectedBook
+        return bookInfo.book;
       }
     })
     .then(async (answer) => {
-      const selectedVolume = volumes.find(
-        (item) => item.text === answer.volume
-      );
-      const bookIndex = selectedVolume ?? answer
+      const bookIndex = volumes.length ? volumes.find((item) => item.text === answer.volume) : answer;
       const bookParser = new BookParser();
-      const bookContent: IBOOk = await bookParser.parse(bookIndex)
+      bookInfo.volume = await bookParser.parse(bookIndex)
       const epubFactory = new EpubFactory(OUTPUT_DIR)
-      await epubFactory.make(
-        selectedSeries,
-        selectedCollection,
-        selectedBook,
-        bookContent
-      );
+      await epubFactory.make(bookInfo);
     })
-}
-
-run();
+})();

@@ -1,33 +1,31 @@
 import fs from "fs"
 import path from "path"
-import TextToSVG from "text-to-svg";
-import sharp from "sharp";
+import { createCanvas, GlobalFonts } from "@napi-rs/canvas";
 import { EPub, EpubOptions } from "@lesjoursfr/html-to-epub";
-import { IBOOk, IIndex } from "../xml/interfaces";
+import { IBookInfo } from "../xml/interfaces";
+import { INSTITUTE } from "../config"
 
 export class Factory {
   private _defaultOptions = {
     author: "buddha",
-    publisher: "https://jihulab.com/dhammena/dhamma-epub.git",
+    publisher: "https://jihulab.com/dhammena/pali-epub.git",
     version: 3,
     appendChapterTitles: false,
     verbose: true,
-    fonts: [`${path.dirname(__dirname)}/assets/fonts/Pali.ttf`]
+    fonts: [`${path.dirname(__dirname)}/assets/fonts/Pali.ttf`],
+    customOpfTemplatePath: `${__dirname}/content.opf.ejs`,
   };
 
-  constructor(private _outputDir: string) {
-    if (!fs.existsSync(_outputDir)) {
-      fs.mkdirSync(_outputDir, { recursive: true });
-    }
-  }
+  constructor(private _outputDir: string) {}
 
-  async make(series: IIndex, collection:IIndex, book:IIndex, bookInfo: IBOOk) {
+  async make(bookInfo: IBookInfo) {
+    let bookDir = this._createBookDir(bookInfo);
     let options = {
-      title: bookInfo.title,
-      css: this._cssBy(series, collection, book),
-      // cover: this._createCover(bookInfo.title),
-      tocTitle: bookInfo.title,
-      content: bookInfo.chapters.map((item) => {
+      title: bookInfo.volume.title,
+      css: this._cssBy(bookInfo),
+      cover: this._createCover(bookInfo),
+      tocTitle: bookInfo.volume.title,
+      content: bookInfo.volume.chapters.map((item) => {
         return {
           title: item.title,
           data: item.body,
@@ -35,7 +33,7 @@ export class Factory {
       }),
     };
     options = { ...this._defaultOptions, ...options };
-    const output = `${this._outputDir}/${bookInfo.title}.epub`;
+    const output = `${bookDir}/${bookInfo.volume.title}.epub`;
     const epub = new EPub(<EpubOptions>options, output);
     await epub
       .render()
@@ -47,38 +45,69 @@ export class Factory {
       });
   }
 
-  private _cssBy(series: IIndex, collection: IIndex, book: IIndex): string {
-    const cssFile = `${path.dirname(__dirname)}/assets/css/default.css`;
-    const css = fs.readFileSync(cssFile, "utf-8");
-    return css
+  private _createBookDir(bookInfo: IBookInfo): string {
+    const bookDir = `${this._outputDir}/${bookInfo.series.text}/${bookInfo.collection.text}/${bookInfo.book.text}`;
+    if (!fs.existsSync(bookDir)) {
+      fs.mkdirSync(bookDir, { recursive: true });
+    }
+    return bookDir;
   }
 
-  private _createCover(title: string): string {
-    // const coverPath = `${path.dirname(__dirname)}/assets/images/${title}.jpg`;
-    // generate svg
-    // const textToSVG = TextToSVG.loadSync(`${path.dirname(__dirname)}/assets/fonts/Pali.ttf`);
-    // const svgAttributes = { fill: "#008080" };
-    // const svgOptions = {
-    //   x: 0,
-    //   y: 0,
-    //   fontSize: 72,
-    //   anchor: "top",
-    //   attributes: svgAttributes,
-    // };
-    // const svg = textToSVG.getSVG(title, <TextToSVG.GenerationOptions>svgOptions);
+  private _cssBy(bookInfo: IBookInfo): string {
+    const cssFile = `${path.dirname(__dirname)}/assets/css/default.css`;
+    const css = fs.readFileSync(cssFile, "utf-8");
+    return css;
+  }
+
+  private _createCover(booInfo:IBookInfo): string {
+    const coverPath = `${path.dirname(__dirname)}/assets/images/cover.jpeg`;
+
+    // width and height
+    const width = 600;
+    const height = 900;
+    const canvas = createCanvas(width, height);
     
-    // combine background image and text svg
-    // let svgBuffer = Buffer.from(svg);
-    // let bgPath = `${path.dirname(__dirname)}/assets/images/bg.jpg`;
-    // sharp(bgPath)
-    //   .composite([
-    //     {
-    //       input: svgBuffer,
-    //       gravity: "center",
-    //     },
-    //   ])
-    //   .toFile(coverPath);
-    // return coverPath
-    return `${path.dirname(__dirname)}/assets/images/bg.jpg`;
+    // font
+    GlobalFonts.registerFromPath(
+      `${path.dirname(__dirname)}/assets/fonts/Pali.ttf`,
+      "Pali"
+    );
+
+    const context = canvas.getContext("2d");
+    
+    // Background color
+    context.fillStyle = "#AD0101";
+    context.fillRect(0, 0, width, height);
+    
+    // title
+    const title =
+      booInfo.book.text === booInfo.volume.title
+        ? booInfo.collection.text
+        : booInfo.book.text;
+    let fontSize =
+      Math.round((20 / title.length) * 55) > 55
+        ? 55
+        : Math.round((20 / title.length) * 55);
+    context.font = `${fontSize}px 'Pali'`;
+    context.textAlign = 'center';
+    context.fillStyle = "#FFFFFF";
+    context.fillText(title, width / 2, height / 6);
+    
+    context.fillText("•", width / 2, height / 3.95);
+    
+    // sub title
+    const subTitle = booInfo.volume.title;
+    fontSize =
+      Math.round((20 / subTitle.length) * 40) > 40
+        ? 40
+        : Math.round((20 / subTitle.length) * 40);
+    context.font = `${fontSize}px 'Pali'`;
+    context.fillText(subTitle, width / 2, height / 3 );
+    context.font = "22px 'Pali'";
+    context.fillText(INSTITUTE, width / 2, height / 1.08);
+
+    const buffer = canvas.toBuffer("image/jpeg");
+    fs.writeFileSync(coverPath, buffer);
+    return coverPath;
   }
 }

@@ -1,7 +1,7 @@
 import fs from "fs";
 import { Parser, ParserOptions } from "xml2js";
 
-import { IXmlStructOfIndex, IIndex, IXmlStructOfChapter, IXmlStructOfBook, IChapter, IBOOk } from "./interfaces"
+import { IXmlStructOfIndex, IIndex, IXmlStructOfChapter, IXmlStructOfBook, IChapter, IVolume } from "./interfaces"
 import { INDEX_DIR } from "../config"
 
 abstract class ParserBase {
@@ -65,8 +65,8 @@ export class BookParser extends ParserBase {
     super();
   }
 
-  async parse(index: IIndex): Promise<IBOOk> {
-    let book: IBOOk = {
+  async parse(index: IIndex): Promise<IVolume> {
+    let book: IVolume = {
       title: index.text,
       chapters: [],
     };

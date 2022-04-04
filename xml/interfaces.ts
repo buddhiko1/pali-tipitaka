@@ -24,11 +24,18 @@ export interface IXmlStructOfBook {
 }
 
 export interface IChapter {
-  title: string,
+  title: string;
   body: string
 }
 
-export interface IBOOk {
+export interface IVolume {
   title: string;
-  chapters: IChapter[];
+  chapters: IChapter[]
+}
+
+export interface IBookInfo {
+  series: IIndex;
+  collection: IIndex;
+  book: IIndex;
+  volume: IVolume
 }
