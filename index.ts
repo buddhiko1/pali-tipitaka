@@ -1,14 +1,14 @@
 import clear from "clear";
 import inquirer from "inquirer";
 
-import { IndexParser, BookParser } from "./xml";
+import { IndexParser, VolumeParser } from "./xml";
 import { Factory as EpubFactory } from "./epub";
 import { IIndex, IBookInfo } from "./xml/interfaces";
-import { ROOT_INDEX_FILE, OUTPUT_DIR } from "./config";
+import { ROOT_INDEX_FILE, OUTPUT_DIR, INDEX_DIR, PUBLISH_INFO } from "./config";
 
 (async () => {
   clear()
-  const parser = new IndexParser();
+  const parser = new IndexParser(INDEX_DIR);
   const indexJson = await parser.parse(ROOT_INDEX_FILE);
   let bookInfo: IBookInfo = {
     series: { text: "", src: "" },
@@ -89,10 +89,10 @@ import { ROOT_INDEX_FILE, OUTPUT_DIR } from "./config";
       }
     })
     .then(async (answer) => {
-      const bookIndex = volumes.length ? volumes.find((item) => item.text === answer.volume) : answer;
-      const bookParser = new BookParser();
-      bookInfo.volume = await bookParser.parse(bookIndex)
-      const epubFactory = new EpubFactory(OUTPUT_DIR)
+      const volumeIndex = volumes.length ? volumes.find((item) => item.text === answer.volume) : answer;
+      const volumeParser = new VolumeParser(INDEX_DIR);
+      bookInfo.volume = await volumeParser.parse(volumeIndex)
+      const epubFactory = new EpubFactory(OUTPUT_DIR, PUBLISH_INFO)
       await epubFactory.make(bookInfo);
     })
 })();

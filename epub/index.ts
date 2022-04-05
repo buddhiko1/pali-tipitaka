@@ -3,7 +3,7 @@ import path from "path"
 import { createCanvas, GlobalFonts } from "@napi-rs/canvas";
 import { EPub, EpubOptions } from "@lesjoursfr/html-to-epub";
 import { IBookInfo } from "../xml/interfaces";
-import { INSTITUTE } from "../config"
+import { IPublishInfo } from "../common/interfaces";
 
 export class Factory {
   private _defaultOptions = {
@@ -16,7 +16,7 @@ export class Factory {
     customOpfTemplatePath: `${__dirname}/content.opf.ejs`,
   };
 
-  constructor(private _outputDir: string) {}
+  constructor(private _outputDir: string, private _publishInfo: IPublishInfo) {}
 
   async make(bookInfo: IBookInfo) {
     let bookDir = this._createBookDir(bookInfo);
@@ -104,7 +104,7 @@ export class Factory {
     context.font = `${fontSize}px 'Pali'`;
     context.fillText(subTitle, width / 2, height / 3 );
     context.font = "22px 'Pali'";
-    context.fillText(INSTITUTE, width / 2, height / 1.08);
+    context.fillText(this._publishInfo.institute, width / 2, height / 1.08);
 
     const buffer = canvas.toBuffer("image/jpeg");
     fs.writeFileSync(coverPath, buffer);

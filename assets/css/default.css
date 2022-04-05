@@ -39,6 +39,13 @@ hi[rend="dot"] {
 	display: none;
 }
 
+.blockNumber {
+	margin-bottom: -0.5rem;
+	margin-top: 2rem;
+	font-weight: light;
+	color: #AD0101;
+}
+
 p {
 	color: #008080;
 	text-indent: 1.3em;

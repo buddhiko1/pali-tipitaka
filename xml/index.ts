@@ -1,16 +1,18 @@
 import fs from "fs";
 import { Parser, ParserOptions } from "xml2js";
 
-import { IXmlStructOfIndex, IIndex, IXmlStructOfChapter, IXmlStructOfBook, IChapter, IVolume } from "./interfaces"
-import { INDEX_DIR } from "../config"
+import { IXmlStructOfIndex, IIndex, IXmlStructOfChapter, IXmlStructOfVolume, IChapter, IVolume } from "./interfaces"
+import { BaseBodyParser, DefaultBodyParser } from "./bodyParser";
 
 abstract class ParserBase {
   private _parser: Parser;
   private _options: ParserOptions = {
     explicitRoot: false,
   };
+  protected _indexDir: string;
 
-  constructor(options?: ParserOptions) {
+  constructor(indexDir: string, options?: ParserOptions) {
+    this._indexDir = indexDir
     this._parser = new Parser({ ...this._options, ...options });
   }
 
@@ -28,8 +30,8 @@ abstract class ParserBase {
 }
 
 export class IndexParser extends ParserBase {
-  constructor() {
-    super();
+  constructor(indexDir: string) {
+    super(indexDir);
   }
 
   async parse(indexFile: string): Promise<IIndex> {
@@ -50,7 +52,7 @@ export class IndexParser extends ParserBase {
       index.src = nodes;
     } else {
       if (xml.$.src.startsWith("toc")) {
-        const indexFile = `${INDEX_DIR}/${xml.$.src}`;
+        const indexFile = `${this._indexDir}/${xml.$.src}`;
         return await this.parse(indexFile);
       } else {
         index.src = xml.$.src;
@@ -60,63 +62,39 @@ export class IndexParser extends ParserBase {
   }
 }
 
-export class BookParser extends ParserBase {
-  constructor() {
-    super();
+export class VolumeParser extends ParserBase {
+  private _bodyParser: BaseBodyParser;
+  constructor(indexDir: string, bodyParser?: BaseBodyParser) {
+    super(indexDir);
+    this._bodyParser = bodyParser ? bodyParser : new DefaultBodyParser();
   }
 
   async parse(index: IIndex): Promise<IVolume> {
-    let book: IVolume = {
+    let volume: IVolume = {
       title: index.text,
       chapters: [],
     };
-    const indexFile = `${INDEX_DIR}${index.src.slice(1)}`;
-    const xml: IXmlStructOfBook = await this._parseXml(indexFile);
+    const indexFile = `${this._indexDir}${index.src.slice(1)}`;
+    const xml: IXmlStructOfVolume = await this._parseXml(indexFile);
     for (let chapterXml of xml.tree) {
-      const chapter = this._parseChapter(chapterXml)
-      book.chapters.push(chapter)
+      const chapter = this._parseChapter(chapterXml);
+      volume.chapters.push(chapter);
     }
-    return book
+    return volume;
   }
 
   private _parseChapter(xml: IXmlStructOfChapter): IChapter {
-    const xmlFile = `${INDEX_DIR}/${xml.$.action}`
-    const fileContent = fs.readFileSync(xmlFile, "utf-8");
+    const xmlFile = `${this._indexDir}/${xml.$.action}`;
+    const content = fs.readFileSync(xmlFile, "utf-8");
     const title = xml.$.text.replace(/^[\(\d\)\. ]*/g, "");
-    const body = this._extractBody(fileContent);
+    const body = this._bodyParser.parse(content);
     if (body) {
       return {
         title,
         body,
       };
     } else {
-      throw Error(`invalid body from file: ${xmlFile}!`)
+      throw Error(`invalid body from file: ${xmlFile}!`);
     }
-  }
-
-  private _extractBody(fileContent: string): string {
-    const bodyRegexp = /<body>(?<body>[\w|\W]*)<\/body>/g;
-    const matchedArray = [...fileContent.matchAll(bodyRegexp)];
-    let body = matchedArray[0]?.groups?.body ?? ""
-    if (body) {
-      // remove redundant html
-      let homageRegex =
-        /(?<=^[\r\n]*)<p rend="centre"> Namo tassa bhagavato arahato sammāsambuddhassa<\/p>/g;
-      body = body.replace(homageRegex, "");
-      const nikayaRegexp = /<p rend="nikaya">[\w|\W]*?<\/p>/g;
-      body = body.replace(nikayaRegexp, "");
-      const titleRegex =
-        /(?<=<p rend="book">[\w|\W]*?<\/p>[\r\n]*)<p rend="title">[\w|\W]*?<\/p>/g;
-      body = body.replace(titleRegex, "");
-      const bookRegexp = /<p rend="book">[\w|\W]*?<\/p>/g;
-      body = body.replace(bookRegexp, "");
-      const returnRegexp = /^[\r\n]*/g;
-      body = body.replace(returnRegexp, "");
-      
-      //
-      const subTitleRegexp = /<p rend="subhead">/g;
-      body = body.replaceAll(subTitleRegexp, '<p class="subhead">')
-    }
-    return body
   }
 }

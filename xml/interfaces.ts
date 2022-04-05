@@ -19,7 +19,7 @@ export interface IXmlStructOfChapter {
   };
 }
 
-export interface IXmlStructOfBook {
+export interface IXmlStructOfVolume {
   tree: IXmlStructOfChapter[];
 }
 
