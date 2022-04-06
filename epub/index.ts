@@ -1,9 +1,13 @@
 import fs from "fs"
 import path from "path"
+
 import { createCanvas, GlobalFonts } from "@napi-rs/canvas";
 import { EPub, EpubOptions } from "@lesjoursfr/html-to-epub";
+
 import { IBookInfo } from "../xml/interfaces";
 import { IPublishInfo } from "../common/interfaces";
+
+import { Generator as CssGenerator } from "./cssGenerator";
 
 export class Factory {
   private _defaultOptions = {
@@ -16,15 +20,19 @@ export class Factory {
     customOpfTemplatePath: `${__dirname}/content.opf.ejs`,
   };
 
-  constructor(private _outputDir: string, private _publishInfo: IPublishInfo) {}
+  private _cssGenerator: CssGenerator;
+
+  constructor(private _outputDir: string, private _publishInfo: IPublishInfo) {
+    this._cssGenerator = new CssGenerator()
+  }
 
   async make(bookInfo: IBookInfo) {
     let bookDir = this._createBookDir(bookInfo);
     let options = {
       title: bookInfo.volume.title,
-      css: this._cssBy(bookInfo),
+      css: this._cssGenerator.generate(bookInfo),
       cover: this._createCover(bookInfo),
-      tocTitle: bookInfo.volume.title,
+      // tocTitle: bookInfo.volume.title,
       content: bookInfo.volume.chapters.map((item) => {
         return {
           title: item.title,
@@ -51,12 +59,6 @@ export class Factory {
       fs.mkdirSync(bookDir, { recursive: true });
     }
     return bookDir;
-  }
-
-  private _cssBy(bookInfo: IBookInfo): string {
-    const cssFile = `${path.dirname(__dirname)}/assets/css/default.css`;
-    const css = fs.readFileSync(cssFile, "utf-8");
-    return css;
   }
 
   private _createCover(booInfo:IBookInfo): string {
