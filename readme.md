@@ -1,4 +1,4 @@
-### Generate beautiful Epub of Pali tipitaka with customized style and font.
+### Generate beautiful Epub of Pali tipitaka with custom style and font.
 1. [install nodejs](https://nodejs.org)
 2. Clone project.
 3. Run `npm install` in project directory.
