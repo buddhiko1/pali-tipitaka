@@ -1,3 +1,6 @@
+### Preview
+![image](https://github.com/buddhiko1/pali-epub/blob/master/assets/images/preview.jpg)
+
 ### Generate beautiful Epub of Pali tipitaka with custom style and font.
 1. [install nodejs](https://nodejs.org).
 2. Install pnpm `sudo npm install -g pnpm`.
