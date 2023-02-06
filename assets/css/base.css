@@ -13,14 +13,14 @@ body {
 }
 
 h1 {
-	color: #AD0101;
+	color: #ad0101;
 	text-indent: 0.5em;
 	font-size: 1.7rem;
 	margin-top: 1.3rem;
 }
 
 .chapter {
-	color: #AD0101;
+	color: #ad0101;
 	font-weight: bold;
 	font-size: 1.15rem;
 	text-indent: 0.5em;
@@ -35,7 +35,7 @@ h1 {
 .subhead {
 	margin-top: 2.5rem;
 	font-weight: bold;
-	color:rgba(13, 63, 228, 0.918);
+	color:#0d3fe3;
 }
 
 .subhead:first-child {
@@ -46,11 +46,11 @@ h1 {
 	margin-bottom: -0.5rem;
 	margin-top: 2rem;
 	font-weight: light;
-	color: #AD0101;
+	color: #ad0101;
 }
 
 .inlineNumber {
-	color: rgba(175, 168, 168, 0.815);
+	color: #aea7a7;
 }
 
 p {
