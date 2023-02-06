@@ -1,14 +1,12 @@
 export abstract class BaseBodyParser {
   
-  constructor() { }
-  
   protected _baseParse(content: string): string {
     const bodyRegexp = /<body>(?<body>[\w|\W]*)<\/body>/g;
     const matchedArray = [...content.matchAll(bodyRegexp)];
     let body = matchedArray[0]?.groups?.body ?? "";
     if (body) {
       // remove redundant html
-      let homageRegex = /(?<=^[\r\n]*)<p rend="centre"> Namo tassa bhagavato arahato sammāsambuddhassa<\/p>/g;
+      const homageRegex = /(?<=^[\r\n]*)<p rend="centre"> Namo tassa bhagavato arahato sammāsambuddhassa<\/p>/g;
       body = body.replace(homageRegex, "");
       const nikayaRegexp = /<p rend="nikaya">[\w|\W]*?<\/p>/g;
       body = body.replace(nikayaRegexp, "");

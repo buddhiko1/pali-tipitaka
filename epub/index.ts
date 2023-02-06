@@ -5,7 +5,7 @@ import { createCanvas, GlobalFonts } from "@napi-rs/canvas";
 import { EPub, EpubOptions } from "@lesjoursfr/html-to-epub";
 
 import { IBookInfo } from "../xml/interfaces";
-import { IPublishInfo } from "../common/interfaces";
+import { IPublishInfo } from "../public/interfaces";
 
 import { Generator as CssGenerator } from "./cssGenerator";
 
@@ -27,7 +27,7 @@ export class Factory {
   }
 
   async make(bookInfo: IBookInfo) {
-    let bookDir = this._createBookDir(bookInfo);
+    const bookDir = this._createBookDir(bookInfo);
     let options = {
       title: bookInfo.volume.title,
       css: this._cssGenerator.generate(bookInfo),
@@ -46,10 +46,10 @@ export class Factory {
     await epub
       .render()
       .then(() => {
-        console.log("Ebook Generated Successfully!");
+        console.log(`${bookInfo.volume.title} Generated Successfully!`);
       })
       .catch((err) => {
-        console.error("Failed to generate Ebook because of ", err);
+        console.error(`Failed to generate ${bookInfo.volume.title}, because of `, err);
       });
   }
 
@@ -77,7 +77,7 @@ export class Factory {
 
     const context = canvas.getContext("2d");
     
-    // Background color
+    // color of background image
     context.fillStyle = "#AD0101";
     context.fillRect(0, 0, width, height);
     

@@ -12,8 +12,6 @@ export class Generator {
     styleTextWithNumber: false,
   };
 
-  constructor() {}
-
   generate(booInfo: IBookInfo) {
     const options = this._optionsBy(booInfo);
     const baseCssFile = `${path.dirname(__dirname)}/assets/css/base.css`;

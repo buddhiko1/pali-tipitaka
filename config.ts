@@ -1,4 +1,4 @@
-import { IPublishInfo } from "./common/interfaces";
+import { IPublishInfo } from "./public/interfaces";
 export const INDEX_DIR = `${__dirname}/tipitaka`
 export const ROOT_INDEX_FILE = `${INDEX_DIR}/toc0.xml`;
 export const OUTPUT_DIR = `${__dirname}/output`;

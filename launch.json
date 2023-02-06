@@ -1,0 +1,15 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Lanunch Node",
+      "type": "typescript",
+      "request": "launch",
+      "runtimeArgs": ["-r", "ts-node/register"],
+      "runtimeExecutable": "node",
+      "args": ["--inspect", "${file}"],
+      "skipFiles": ["node_modules/**"],
+      "console": "integratedTerminal"
+    }
+  ]
+}

@@ -40,13 +40,13 @@ export class IndexParser extends ParserBase {
   }
 
   private async _extractIndex(xml: IXmlStructOfIndex): Promise<IIndex> {
-    let index: IIndex = {
+    const index: IIndex = {
       text: xml.$.text,
       src: [],
     };
     if (xml.tree) {
-      let nodes: IIndex[] = [];
-      for (let node of xml.tree) {
+      const nodes: IIndex[] = [];
+      for (const node of xml.tree) {
         nodes.push(await this._extractIndex(node));
       }
       index.src = nodes;
@@ -69,14 +69,14 @@ export class VolumeParser extends ParserBase {
     this._bodyParser = bodyParser ? bodyParser : new DefaultBodyParser();
   }
 
-  async parse(index: IIndex): Promise<IVolume> {
-    let volume: IVolume = {
-      title: index.text,
+  async parse(item: IIndex): Promise<IVolume> {
+    const volume: IVolume = {
+      title: item.text,
       chapters: [],
     };
-    const indexFile = `${this._indexDir}${index.src.slice(1)}`;
+    const indexFile = `${this._indexDir}${item.src.slice(1)}`;
     const xml: IXmlStructOfVolume = await this._parseXml(indexFile);
-    for (let chapterXml of xml.tree) {
+    for (const chapterXml of xml.tree) {
       const chapter = this._parseChapter(chapterXml);
       volume.chapters.push(chapter);
     }
@@ -86,6 +86,7 @@ export class VolumeParser extends ParserBase {
   private _parseChapter(xml: IXmlStructOfChapter): IChapter {
     const xmlFile = `${this._indexDir}/${xml.$.action}`;
     const content = fs.readFileSync(xmlFile, "utf-8");
+    // eslint-disable-next-line no-useless-escape
     const title = xml.$.text.replace(/^[\(\d\)\. ]*/g, "");
     const body = this._bodyParser.parse(content);
     if (body) {
