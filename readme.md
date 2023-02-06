@@ -1,7 +1,9 @@
+# Generate beautiful Epub of Pali tipitaka.
+
 ### Preview
 ![image](https://github.com/buddhiko1/pali-epub/blob/master/assets/images/preview.jpg)
 
-### Generate beautiful Epub of Pali tipitaka with custom style and font.
+### Generate
 1. [install nodejs](https://nodejs.org).
 2. Install pnpm `sudo npm install -g pnpm`.
 3. Run `pnpm setup`.
@@ -13,5 +15,5 @@
 8. Run `ts-node index.ts` to generate book with command line interaction.
 10. Download generated epub from "output" directory.
 
-### Config
+### Tune
 1. To fine tune the book style, you can regenerate book after edit css property such as line height, font color in the assets/css/base.css.
