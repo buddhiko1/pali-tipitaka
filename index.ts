@@ -2,7 +2,7 @@ import { Command } from "commander";
 
 import { Factory as BookFactory } from "./book";
 
-let program = new Command();
+const program = new Command();
 
 program
   .version("1.0.0")

@@ -2,73 +2,73 @@
   font-family: "Pali";
   font-style: normal;
   font-weight: normal;
-  src : url("./fonts/Pali.ttf");
+  src: url("./fonts/Pali.ttf");
 }
 
 body {
-	font-family: "Pali";
-	line-height: 1.5rem;
-	margin-left: 1rem;
-	margin-right: 1rem;
+  font-family: "Pali";
+  line-height: 1.5rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 h1 {
-	color: #ad0101;
-	text-indent: 0.5em;
-	font-size: 1.7rem;
-	margin-top: 1.3rem;
+  color: #ad0101;
+  text-indent: 0.5em;
+  font-size: 1.7rem;
+  margin-top: 1.3rem;
 }
 
 .chapter {
-	color: #ad0101;
-	font-weight: bold;
-	font-size: 1.15rem;
-	text-indent: 0.5em;
+  color: #ad0101;
+  font-weight: bold;
+  font-size: 1.15rem;
+  text-indent: 0.5em;
 }
 
 .title {
-	margin-top: 2.5rem;
-	font-weight: bold;
-	color:chocolate;
+  margin-top: 2.5rem;
+  font-weight: bold;
+  color: chocolate;
 }
 
 .subhead {
-	margin-top: 2.5rem;
-	font-weight: bold;
-	color:#0d3fe3;
+  margin-top: 2.5rem;
+  font-weight: bold;
+  color: #0d3fe3;
 }
 
 .subhead:first-child {
-	margin-top: 1rem;
+  margin-top: 1rem;
 }
 
 .blockNumber {
-	margin-bottom: -0.5rem;
-	margin-top: 2rem;
-	font-weight: light;
-	color: #ad0101;
+  margin-bottom: -0.5rem;
+  margin-top: 2rem;
+  font-weight: light;
+  color: #ad0101;
 }
 
 .inlineNumber {
-	color: #aea7a7;
+  color: #aea7a7;
 }
 
 p {
-	color: #008080;
-	text-indent: 1.3em;
+  color: #008080;
+  text-indent: 1.3em;
 }
 
 li[class="table-of-content"] {
-	padding: 0.3rem 0;
-	margin-left: 1rem;
+  padding: 0.3rem 0;
+  margin-left: 1rem;
 }
 
-li[class="table-of-content"]>a {
-	text-decoration: none;
+li[class="table-of-content"] > a {
+  text-decoration: none;
 }
 
 note {
-	font-style: italic;
+  font-style: italic;
   color: gray;
   font-size: 0.8rem;
 }

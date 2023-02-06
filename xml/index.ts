@@ -1,7 +1,14 @@
 import fs from "fs";
 import { Parser, ParserOptions } from "xml2js";
 
-import { IXmlStructOfIndex, IIndex, IXmlStructOfChapter, IXmlStructOfVolume, IChapter, IVolume } from "./interfaces"
+import {
+  IXmlStructOfIndex,
+  IIndex,
+  IXmlStructOfChapter,
+  IXmlStructOfVolume,
+  IChapter,
+  IVolume,
+} from "./interfaces";
 import { BaseBodyParser, DefaultBodyParser } from "./bodyParser";
 
 abstract class ParserBase {
@@ -12,7 +19,7 @@ abstract class ParserBase {
   protected _indexDir: string;
 
   constructor(indexDir: string, options?: ParserOptions) {
-    this._indexDir = indexDir
+    this._indexDir = indexDir;
     this._parser = new Parser({ ...this._options, ...options });
   }
 

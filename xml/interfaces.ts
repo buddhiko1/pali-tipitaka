@@ -15,7 +15,7 @@ export interface IXmlStructOfChapter {
   $: {
     text: string;
     action: string;
-    target: string
+    target: string;
   };
 }
 
@@ -25,17 +25,17 @@ export interface IXmlStructOfVolume {
 
 export interface IChapter {
   title: string;
-  body: string
+  body: string;
 }
 
 export interface IVolume {
   title: string;
-  chapters: IChapter[]
+  chapters: IChapter[];
 }
 
 export interface IBookInfo {
   series: IIndex;
   collection: IIndex;
   book: IIndex;
-  volume: IVolume
+  volume: IVolume;
 }

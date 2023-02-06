@@ -121,7 +121,8 @@ export class Factory {
     const indexJson = await indexParser.parse(ROOT_INDEX_FILE);
     const series = typeof indexJson.src === "string" ? [] : indexJson.src;
     for (const seriesItem of series) {
-      const collections = typeof seriesItem.src === "string" ? [] : seriesItem.src;
+      const collections =
+        typeof seriesItem.src === "string" ? [] : seriesItem.src;
       for (const collection of collections) {
         const books = typeof collection.src === "string" ? [] : collection.src;
         for (const book of books) {
@@ -132,7 +133,7 @@ export class Factory {
               series: seriesItem,
               collection: collection,
               book: book,
-              volume: volume 
+              volume: volume,
             };
             await this._makeOneBook(bookInfo);
           }

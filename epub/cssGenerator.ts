@@ -1,5 +1,5 @@
-import fs from "fs"
-import path from "path"
+import fs from "fs";
+import path from "path";
 
 import { IBookInfo } from "../xml/interfaces";
 import { ICssOptions } from "./interfaces";
@@ -20,7 +20,7 @@ export class Generator {
       css = this._hideInlineNumber(css);
     }
     if (options.hideBlockNumber) {
-      css = this._hideBlockNumber(css)
+      css = this._hideBlockNumber(css);
     }
     if (options.styleTextWithNumber) {
       css = this._styleTextWithNumber(css);

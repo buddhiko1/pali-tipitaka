@@ -1,5 +1,5 @@
-import fs from "fs"
-import path from "path"
+import fs from "fs";
+import path from "path";
 
 import { createCanvas, GlobalFonts } from "@napi-rs/canvas";
 import { EPub, EpubOptions } from "@lesjoursfr/html-to-epub";
@@ -23,7 +23,7 @@ export class Factory {
   private _cssGenerator: CssGenerator;
 
   constructor(private _outputDir: string, private _publishInfo: IPublishInfo) {
-    this._cssGenerator = new CssGenerator()
+    this._cssGenerator = new CssGenerator();
   }
 
   async make(bookInfo: IBookInfo) {
@@ -49,7 +49,10 @@ export class Factory {
         console.log(`${bookInfo.volume.title} Generated Successfully!`);
       })
       .catch((err) => {
-        console.error(`Failed to generate ${bookInfo.volume.title}, because of `, err);
+        console.error(
+          `Failed to generate ${bookInfo.volume.title}, because of `,
+          err
+        );
       });
   }
 
@@ -61,14 +64,14 @@ export class Factory {
     return bookDir;
   }
 
-  private _createCover(booInfo:IBookInfo): string {
+  private _createCover(booInfo: IBookInfo): string {
     const coverPath = `${path.dirname(__dirname)}/assets/images/cover.jpeg`;
 
     // width and height
     const width = 600;
     const height = 900;
     const canvas = createCanvas(width, height);
-    
+
     // font
     GlobalFonts.registerFromPath(
       `${path.dirname(__dirname)}/assets/fonts/Pali.ttf`,
@@ -76,11 +79,11 @@ export class Factory {
     );
 
     const context = canvas.getContext("2d");
-    
+
     // color of background image
     context.fillStyle = "#AD0101";
     context.fillRect(0, 0, width, height);
-    
+
     // title
     const title =
       booInfo.book.text === booInfo.volume.title
@@ -91,12 +94,12 @@ export class Factory {
         ? 55
         : Math.round((20 / title.length) * 55);
     context.font = `${fontSize}px 'Pali'`;
-    context.textAlign = 'center';
+    context.textAlign = "center";
     context.fillStyle = "#FFFFFF";
     context.fillText(title, width / 2, height / 6);
-    
+
     context.fillText("•", width / 2, height / 3.95);
-    
+
     // sub title
     const subTitle = booInfo.volume.title;
     fontSize =
@@ -104,7 +107,7 @@ export class Factory {
         ? 40
         : Math.round((20 / subTitle.length) * 40);
     context.font = `${fontSize}px 'Pali'`;
-    context.fillText(subTitle, width / 2, height / 3 );
+    context.fillText(subTitle, width / 2, height / 3);
     context.font = "22px 'Pali'";
     context.fillText(this._publishInfo.institute, width / 2, height / 1.08);
 
