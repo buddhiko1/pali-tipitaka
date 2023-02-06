@@ -2,7 +2,7 @@ import { Command } from "commander";
 
 import { Factory as BookFactory } from "./book";
 
-const program = new Command();
+let program = new Command();
 
 program
   .version("1.0.0")
@@ -10,11 +10,11 @@ program
   .usage("index.ts [options]")
   .option("-a, --all", "generates all books")
   .action((options) => {
-    const bookFactory = new BookFactory()
+    const bookFactory = new BookFactory();
     if (options.all) {
-      bookFactory.makeAllBook()
+      bookFactory.makeAllBook();
     } else {
-      bookFactory.makeSelectedBook()
+      bookFactory.makeSelectedBook();
     }
   });
 
