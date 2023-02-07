@@ -1,4 +1,4 @@
-# Generate beautiful Epub of tipiṭaka.
+# Generate beautiful epub of Tipiṭaka.
 
 ### Preview
 
