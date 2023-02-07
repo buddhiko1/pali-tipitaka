@@ -1,4 +1,4 @@
-# Generate beautiful Epub of Pali tipitaka.
+# Generate beautiful Epub of tipiṭaka.
 
 ### Preview
 
