@@ -59,8 +59,8 @@ p {
 }
 
 li[class="table-of-content"] {
-  padding: 0.3rem 0;
-  margin-left: 1rem;
+  padding: 0.18rem 0;
+  margin-left: 0.7rem;
 }
 
 li[class="table-of-content"] > a {

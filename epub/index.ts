@@ -33,6 +33,7 @@ export class Factory {
       css: this._cssGenerator.generate(bookInfo),
       cover: this._createCover(bookInfo),
       // tocTitle: bookInfo.volume.title,
+      tocTitle: "Index",
       content: bookInfo.volume.chapters.map((item) => {
         return {
           title: item.title,
