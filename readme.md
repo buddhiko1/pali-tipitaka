@@ -24,4 +24,4 @@
 ### Epub software recommendation
 
 - Linux: `sioyek` or `foliate`.
-- Mac/Windows: `Neat Reader`.
+- Mac/Windows/Android/web: `Neat Reader`.
