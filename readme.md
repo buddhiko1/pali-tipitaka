@@ -17,11 +17,11 @@
 9. Run `ts-node index.ts` to generate book with command line interaction.
 10. Download generated epub from "output" directory.
 
-### Tune
+### Ajust style
 
-1. To fine tune the book style, you can regenerate book after edit css property such as line height, font color in the assets/css/base.css.
+1. To fine-tune the book style, regenerate the book after editing the CSS properties in assets/css/base.css, such as line height and font color.
 
-### Epub software recommendation
+### Recommendation of epub software
 
 - Linux: `sioyek` or `foliate`.
 - Mac/Windows/Android/web: `Neat Reader`.
